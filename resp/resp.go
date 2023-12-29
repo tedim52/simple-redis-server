@@ -57,19 +57,20 @@ func parseSimpleString(respMsg string) string {
 	return msgWoCrlf
 }
 
-
+// format: $<length>\r\n<data>\r\n
 func parseBulkString(respMsg string) string {
 	// TODO: implement
 	return ""
 }
 
+// format: :[<+|->]<value>\r\n
 func parseInt(respMsg string) string {
 	// TODO: implement
 
 	return ""
 }
 
-
+// *<number-of-elements>\r\n<element-1>...<element-n>
 func parseArray(respMsg string) string {
 	// TODO: implement
 

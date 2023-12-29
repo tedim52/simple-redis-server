@@ -46,6 +46,21 @@ func TestParseBulkString(t *testing.T) {
 	respMsgs := []string{
 		"$0\r\n\r\n",
 		"$-1\r\n",
+		"$5\r\nhello\r\n",
+		"$-1\r\n", // null bulk string
+	}
+
+	expectedMsgs := []string{
+		"",
+		""
+	}
+
+	testRespMsgParser(t, parseBulkString, respMsgs, expectedMsgs)
+}
+
+func TestParseInteger(t *testing.T) {
+	respMsgs := []string{
+		
 	}
 
 	expectedMsgs := []string{
@@ -59,6 +74,7 @@ func TestParseBulkString(t *testing.T) {
 func TestParseArray(t *testing.T) {
 	respMsgs := []string{
 		"*0\r\n",
+		"*-1\r\n", // null array
 		"*1\r\n$4\r\nping\r\n",
 		"*2\r\n$4\r\necho\r\n$11\r\nhello world\r\n",
 		"*2\r\n$3\r\nget\r\n$3\r\nkey\r\n",
@@ -67,20 +83,6 @@ func TestParseArray(t *testing.T) {
 		"*5\r\n:1\r\n:2\r\n:3\r\n:4\r\n$5\r\nhello\r",
 		"*3\r\n$5\r\nhello\r\n$-1\r\n$5\r\nworld\r\n", // null element in array
 		}
-
-	expectedMsgs := []string{
-		"",
-		""
-	}
-
-	testRespMsgParser(t, parseBulkString, respMsgs, expectedMsgs)
-}
-
-func TestParseArray(t *testing.T) {
-	respMsgs := []string{
-		"$0\r\n\r\n",
-		"$-1\r\n",
-	}
 
 	expectedMsgs := []string{
 		"",
